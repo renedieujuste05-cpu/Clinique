@@ -1,1 +1,40 @@
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  color: #2c3e50;
+}
+
+h2 {
+  color: #34495e;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+section, footer {
+  margin-bottom: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+ul {
+  list-style-type: square;
+  margin-left: 20px;
+}
+
+p {
+  line-height: 1.6;
+}
 
