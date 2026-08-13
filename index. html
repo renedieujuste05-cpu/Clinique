@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rapport de Projet Institutionnel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Rapport de Projet Institutionnel</h1>
+    <p>Institution : Université Exemple</p>
+  </header>
+
+  <section>
+    <h2>Contexte du projet</h2>
+    <p>Présentation de l’institution, problématique identifiée et justification du projet.</p>
+  </section>
+
+  <section>
+    <h2>Objectifs du projet</h2>
+    <ul>
+      <li>Objectif général : améliorer l’accès aux ressources numériques.</li>
+      <li>Objectifs spécifiques : formation du personnel, sensibilisation des étudiants.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Description du projet</h2>
+    <p>Activités prévues, méthodologie de mise en œuvre et acteurs impliqués.</p>
+  </section>
+
+  <section>
+    <h2>Planification</h2>
+    <p>Calendrier des étapes et ressources nécessaires.</p>
+  </section>
+
+  <section>
+    <h2>Résultats attendus</h2>
+    <p>Impact sur l’institution et les bénéficiaires, indicateurs de réussite.</p>
+  </section>
+
+  <section>
+    <h2>Évaluation et suivi</h2>
+    <p>Méthodes de suivi et outils d’évaluation.</p>
+  </section>
+
+  <footer>
+    <h2>Conclusion</h2>
+    <p>Synthèse des apports du projet et perspectives pour l’avenir.</p>
+  </footer>
+</body>
+</html>
 
