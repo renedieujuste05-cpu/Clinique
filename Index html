@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8">
+  <title>Dosye Klinik Avanse</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background: #2a9d8f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #264653;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #e9c46a;
+    }
+    section {
+      padding: 20px;
+      margin: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #264653;
+    }
+    .btn {
+      display: inline-block;
+      background: #e76f51;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #d65a3a;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #2a9d8f;
+      color: white;
+    }
+    #searchInput {
+      width: 50%;
+      padding: 8px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    footer {
+      background: #264653;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dosye Klinik Avanse</h1>
+    <p>Konsiltasyon ak Swen Pwofesyonèl pou Po, Zong ak Cheve</p>
+  </header>
 
+  <nav>
+    <a href="#tablo">Tablo Pasyan</a>
+    <a href="#galri">Galri</a>
+  </nav>
+
+  <section id="tablo">
+    <h2>Tablo Pasyan ak Konsiltasyon</h2>
+    <input type="text" id="searchInput" placeholder="Rechèch pa non oswa motif...">
+    <button class="btn" onclick="ajoutePasyan()">Ajoute Nouvo Pasyan</button>
+    <button class="btn" onclick="exportCSV()">Ekspòtasyon CSV</button>
+    <button class="btn" onclick="exportPDF()">Ekspòtasyon PDF</button>
+    <table id="pasyanTable">
+      <thead>
+        <tr>
+          <th>Non</th>
+          <th>Laj</th>
+          <th>Motif Konsiltasyon</th>
+          <th>Dat Konsiltasyon</th>
+          <th>Opsyon</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jean Pierre</td>
+          <td>32</td>
+          <td>Gratèl sou po tèt</td>
+          <td>15/08/2026</td>
+          <td>
+            <button class="btn" onclick="modifye(this)">Modifye</button>
+            <button class="btn" onclick="efase(this)">Efase</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Marie Louise</td>
+          <td>28</td>
+          <td>Zong kase fasil</td>
+          <td>10/08/2026</td>
+          <td>
+            <button class="btn" onclick="modifye(this)">Modifye</button>
+            <button class="btn" onclick="efase(this)">Efase</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Klinik Avanse - Tout dwa rezève</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    function ajoutePasyan() {
+      const table = document.getElementById("pasyanTable").getElementsByTagName("tbody")[0];
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td>Nouvo Pasyan</td>
+        <td>--</td>
+        <td>Motif</td>
+        <td>${new Date().toLocaleDateString()}</td>
+        <td>
+          <button class="btn" onclick="modifye(this)">Modifye</button>
+          <button class="btn" onclick="efase(this)">Efase</button>
+        </td>
+      `;
+      alert("Nouvo pasyan ajoute nan tablo a!");
+    }
+
+    function modifye(btn) {
+      const row = btn.parentNode.parentNode;
+      row.cells[0].innerText = prompt("Modifye non pasyan:", row.cells[0].innerText);
+      row.cells[1].innerText = prompt("Modifye laj:", row.cells[1].innerText);
+      row.cells[2].innerText = prompt("Modifye motif:", row.cells[2].innerText);
+      alert("Done pasyan modifye!");
+    }
+
+    function efase(btn) {
+      const row = btn.parentNode.parentNode;
+      row.remove();
+      alert("Pasyan efase nan tablo a!");
+    }
+
+    // Fonksyon rechèch
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll("#pasyanTable tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+      });
+    });
+
+    // Ekspòtasyon CSV
+    function exportCSV() {
+      const rows = document.querySelectorAll("table tr");
+      let csv = [];
+      rows.forEach(row => {
+        const cols = row.querySelectorAll("td, th");
+        const data = Array.from(cols).map(col => col.innerText);
+        csv.push(data.join(","));
+      });
+      const blob = new Blob([csv.join("\n")], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "pasyan.csv";
+      link.click();
+    }
+
+    // Ekspòtasyon PDF
+    async function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text("Lis Pasyan Klinik", 10, 10);
+      let y = 20;
+      const rows = document.querySelectorAll("#pasyanTable tbody tr");
+      rows.forEach(row => {
+        const data = Array.from(row.querySelectorAll("td")).map(col => col.innerText).join(" | ");
+        doc.text(data, 10, y);
+        y += 10;
+      });
+      doc.save("pasyan.pdf");
+    }
+  </script>
+</body>
+</html>
